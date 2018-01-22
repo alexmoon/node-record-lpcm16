@@ -86,6 +86,26 @@ exports.start = function (options) {
   return rec
 }
 
+exports.pause = function () {
+  if (!cp) {
+    console.log('Please start a recording first')
+    return false
+  }
+
+  cp.kill('SIGSTOP') // Pause the spawned process
+  return cp
+}
+
+exports.resume = function () {
+  if (!cp) {
+    console.log('Please start a recording first')
+    return false
+  }
+
+  cp.kill('SIGCONT') // Resume the spawned process
+  return cp
+}
+
 exports.stop = function () {
   if (!cp) {
     console.log('Please start a recording first')
